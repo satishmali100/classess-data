@@ -1,0 +1,13 @@
+# ==========================================
+# LIST VARIABLE
+# Understand:
+# Stores all directions together
+# ==========================================
+
+variable "directions" {
+  type        = list(string)
+  default     = ["left-side", "right-side", "up-side", "down-side"]
+  description = "All available car movement directions"
+}
+
+
