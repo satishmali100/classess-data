@@ -1,7 +1,8 @@
-# resource "azurerm_resource_group" "block1" {
-#   name     = "Himnashu"
-#   location = "West Europe"
-# }
+resource "azurerm_resource_group" "block4" {
+  name     = "Ramesh"
+  location = "West Europe"
+
+}
 
 # resource "azurerm_resource_group" "block1" {
 #   name     = var.him

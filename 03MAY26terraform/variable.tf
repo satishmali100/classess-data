@@ -13,10 +13,10 @@
 
 
 
-variable "rgvm" {
-    Default = resource-vm
-}
+# variable "rgvm" {
+#     Default = resource-vm
+# }
 
-variable "loc" {
-  Default = West Europe
-}
+# variable "loc" {
+#   Default = West Europe
+# }

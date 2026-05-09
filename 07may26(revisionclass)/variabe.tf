@@ -1,6 +1,6 @@
-variable "s" {}
-variable "location" {}
+# variable "s" {}
+# variable "location" {}
 
-variable "multiple" {}
+# variable "multiple" {}
 
-variable "map" {}
+# variable "map" {}
