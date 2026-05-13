@@ -1,0 +1,9 @@
+Useful Kubernetes equivalents:
+
+Docker	Kubernetes
+docker ps	kubectl get pods
+docker images	kubectl get deployments
+docker logs <id>	kubectl logs <pod>
+docker exec -it	kubectl exec -it
+docker stop	kubectl delete pod
+docker inspect	kubectl describe pod
