@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Complete Azure Landing Zone Structure</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background: #f3f6fb;
+      color: #1f2937;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 30px 20px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #0f172a, #1e40af);
+      color: white;
+      padding: 35px;
+      border-radius: 18px;
+      text-align: center;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.18);
+    }
+
+    .hero h1 {
+      font-size: 34px;
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: #dbeafe;
+    }
+
+    .section-title {
+      font-size: 26px;
+      margin: 35px 0 18px;
+      color: #0f172a;
+      border-left: 6px solid #2563eb;
+      padding-left: 12px;
+    }
+
+    .definition {
+      background: white;
+      padding: 24px;
+      border-radius: 14px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+      margin-bottom: 25px;
+    }
+
+    .definition strong {
+      color: #1d4ed8;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 16px;
+      border-top: 5px solid #2563eb;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    }
+
+    .card h3 {
+      color: #0f172a;
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+
+    .card p {
+      margin-bottom: 10px;
+      font-size: 15px;
+    }
+
+    .card ul {
+      padding-left: 20px;
+      font-size: 14px;
+    }
+
+    .card li {
+      margin-bottom: 6px;
+    }
+
+    .architecture {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 25px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+      overflow-x: auto;
+    }
+
+    .diagram {
+      min-width: 900px;
+      text-align: center;
+    }
+
+    .level {
+      margin: 14px auto;
+      padding: 14px;
+      border-radius: 12px;
+      font-weight: bold;
+      color: white;
+    }
+
+    .mg { background: #0f172a; width: 95%; }
+    .sub { background: #1d4ed8; width: 88%; }
+    .rg { background: #0284c7; width: 80%; }
+    .vnet { background: #059669; width: 72%; }
+    .workload { background: #7c3aed; width: 64%; }
+    .ops { background: #ea580c; width: 56%; }
+
+    .two-column {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    }
+
+    th {
+      background: #0f172a;
+      color: white;
+      padding: 14px;
+      text-align: left;
+    }
+
+    td {
+      padding: 13px;
+      border-bottom: 1px solid #e5e7eb;
+      vertical-align: top;
+    }
+
+    tr:nth-child(even) {
+      background: #f8fafc;
+    }
+
+    .interview-box {
+      background: #ecfdf5;
+      border-left: 6px solid #10b981;
+      padding: 22px;
+      border-radius: 12px;
+      margin: 20px 0;
+      font-size: 17px;
+    }
+
+    .warning-box {
+      background: #fff7ed;
+      border-left: 6px solid #f97316;
+      padding: 22px;
+      border-radius: 12px;
+      margin: 20px 0;
+    }
+
+    .roadmap {
+      counter-reset: step;
+    }
+
+    .roadmap-item {
+      background: white;
+      margin-bottom: 14px;
+      padding: 18px 18px 18px 65px;
+      border-radius: 14px;
+      position: relative;
+      box-shadow: 0 5px 14px rgba(0,0,0,0.07);
+    }
+
+    .roadmap-item::before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      left: 18px;
+      top: 18px;
+      background: #2563eb;
+      color: white;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 22px;
+      background: #0f172a;
+      color: white;
+      border-radius: 14px;
+    }
+
+    @media print {
+      body { background: white; }
+      .card, table, .definition, .architecture, .roadmap-item { box-shadow: none; }
+      .hero { box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="hero">
+      <h1>Complete Azure Landing Zone Structure</h1>
+      <p>Start to End Enterprise Cloud Foundation — Interview Ready</p>
+    </div>
+
+    <div class="definition">
+      <h2>What is Landing Zone?</h2>
+      <p><strong>Landing Zone</strong> is a secure, governed, scalable, and standardized cloud foundation prepared before deploying business applications.</p>
+      <p><strong>Interview Line:</strong> “Landing Zone provides cloud hierarchy, governance, IAM, networking, security, monitoring, backup, DR, and cost control so workloads can be deployed safely and consistently.”</p>
+    </div>
+
+    <h2 class="section-title">1. Landing Zone High-Level Architecture</h2>
+    <div class="architecture">
+      <div class="diagram">
+        <div class="level mg">Tenant / Entra ID / Root Management Group</div>
+        <div>↓</div>
+        <div class="level sub">Management Groups: Platform, Landing Zones, Sandbox, Decommissioned</div>
+        <div>↓</div>
+        <div class="level sub">Subscriptions: Connectivity, Identity, Management, Dev, UAT, Prod</div>
+        <div>↓</div>
+        <div class="level rg">Resource Groups: Network RG, Security RG, App RG, Data RG, Monitoring RG</div>
+        <div>↓</div>
+        <div class="level vnet">Hub and Spoke Network: Firewall, Bastion, VPN, Private DNS, Peering</div>
+        <div>↓</div>
+        <div class="level workload">Workloads: VM, VMSS, AKS, App Service, Database, Storage</div>
+        <div>↓</div>
+        <div class="level ops">Operations: Monitoring, Backup, DR, Cost, Documentation</div>
+      </div>
+    </div>
+
+    <h2 class="section-title">2. Complete Landing Zone Components</h2>
+    <div class="flow">
+      <div class="card">
+        <h3>1. Hierarchy</h3>
+        <p>Defines how cloud resources are organized.</p>
+        <ul>
+          <li>Tenant</li>
+          <li>Management Groups</li>
+          <li>Subscriptions</li>
+          <li>Resource Groups</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>2. Governance</h3>
+        <p>Controls standards and compliance.</p>
+        <ul>
+          <li>Azure Policy</li>
+          <li>Initiatives</li>
+          <li>Naming Standard</li>
+          <li>Tagging Standard</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>3. IAM</h3>
+        <p>Controls user and service access.</p>
+        <ul>
+          <li>Entra ID</li>
+          <li>Users and Groups</li>
+          <li>RBAC</li>
+          <li>Managed Identity</li>
+          <li>App Registration</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>4. Networking</h3>
+        <p>Provides secure connectivity.</p>
+        <ul>
+          <li>VNet</li>
+          <li>Subnet</li>
+          <li>Peering</li>
+          <li>Route Table</li>
+          <li>Private DNS</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>5. Compute</h3>
+        <p>Hosts application workloads.</p>
+        <ul>
+          <li>VM</li>
+          <li>VMSS</li>
+          <li>AKS</li>
+          <li>App Service</li>
+          <li>Container Apps</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>6. Advanced Networking</h3>
+        <p>Manages traffic distribution.</p>
+        <ul>
+          <li>Load Balancer</li>
+          <li>Application Gateway</li>
+          <li>WAF</li>
+          <li>Front Door</li>
+          <li>Traffic Manager</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>7. Database</h3>
+        <p>Stores application data.</p>
+        <ul>
+          <li>Azure SQL</li>
+          <li>PostgreSQL</li>
+          <li>MySQL</li>
+          <li>Cosmos DB</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>8. Storage</h3>
+        <p>Stores objects, files, logs and backups.</p>
+        <ul>
+          <li>Storage Account</li>
+          <li>Blob Storage</li>
+          <li>File Share</li>
+          <li>Data Lake</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>9. Security</h3>
+        <p>Protects identity, network and workloads.</p>
+        <ul>
+          <li>Azure Firewall</li>
+          <li>NSG / ASG</li>
+          <li>Key Vault</li>
+          <li>Defender for Cloud</li>
+          <li>Sentinel</li>
+          <li>DDoS Protection</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>10. Backup</h3>
+        <p>Protects data from accidental loss.</p>
+        <ul>
+          <li>Recovery Services Vault</li>
+          <li>VM Backup</li>
+          <li>DB Backup</li>
+          <li>Storage Backup</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>11. Disaster Recovery</h3>
+        <p>Ensures business continuity.</p>
+        <ul>
+          <li>RTO</li>
+          <li>RPO</li>
+          <li>Azure Site Recovery</li>
+          <li>Cross-region Replication</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>12. Monitoring</h3>
+        <p>Provides visibility and alerting.</p>
+        <ul>
+          <li>Azure Monitor</li>
+          <li>Log Analytics</li>
+          <li>Application Insights</li>
+          <li>Alerts</li>
+          <li>Dashboards</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>13. High Availability</h3>
+        <p>Reduces downtime.</p>
+        <ul>
+          <li>Availability Zones</li>
+          <li>Availability Sets</li>
+          <li>Zone Redundant Services</li>
+          <li>Multi-region Design</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>14. Cost Optimization</h3>
+        <p>Controls cloud cost.</p>
+        <ul>
+          <li>Budgets</li>
+          <li>Alerts</li>
+          <li>Reservations</li>
+          <li>Rightsizing</li>
+          <li>Auto Shutdown</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>15. Documentation</h3>
+        <p>Supports operations and handover.</p>
+        <ul>
+          <li>HLD</li>
+          <li>LLD</li>
+          <li>Network Diagram</li>
+          <li>Runbook</li>
+          <li>SOP</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 class="section-title">3. CV-Aligned Architect Positioning</h2>
+    <div class="interview-box">
+      “As a Cloud Infrastructure Architect with experience in Azure, AWS, Kubernetes, Terraform, DevOps, security governance, and observability, I design Landing Zones as an enterprise cloud foundation. My focus is on secure hierarchy, IAM/RBAC, Zero Trust guardrails, hub-spoke networking, policy-as-code, monitoring, backup, DR, FinOps, and automation using Terraform and CI/CD.”
+    </div>
+
+    <h2 class="section-title">4. Current State vs Target State</h2>
+    <table>
+      <tr>
+        <th>Area</th>
+        <th>Current State Assessment</th>
+        <th>Target Landing Zone Design</th>
+      </tr>
+      <tr>
+        <td>Cloud Structure</td>
+        <td>Resources may be created manually or without standard hierarchy.</td>
+        <td>Management groups, subscriptions, and resource groups organized by environment and function.</td>
+      </tr>
+      <tr>
+        <td>Access Control</td>
+        <td>Direct user access or excessive permissions may exist.</td>
+        <td>RBAC through Entra ID groups, least privilege, PIM, and managed identities.</td>
+      </tr>
+      <tr>
+        <td>Networking</td>
+        <td>Flat network or unmanaged connectivity.</td>
+        <td>Hub-spoke model with firewall, private DNS, route tables, peering, and private endpoints.</td>
+      </tr>
+      <tr>
+        <td>Security</td>
+        <td>Security may be reactive or tool-based only.</td>
+        <td>Defense-in-depth with WAF, Firewall, NSG, Key Vault, Defender, Sentinel, and policy guardrails.</td>
+      </tr>
+      <tr>
+        <td>Operations</td>
+        <td>Monitoring, backup, and DR may be inconsistent.</td>
+        <td>Central monitoring, alerts, backup policy, DR plan, runbook, and operational readiness.</td>
+      </tr>
+    </table>
+
+    <h2 class="section-title">5. Environment and Subscription Separation</h2>
+    <table>
+      <tr>
+        <th>Subscription / Zone</th>
+        <th>Purpose</th>
+        <th>Example Services</th>
+      </tr>
+      <tr>
+        <td>Connectivity Subscription</td>
+        <td>Central network and shared connectivity.</td>
+        <td>Hub VNet, Firewall, VPN, ExpressRoute, Bastion, Private DNS</td>
+      </tr>
+      <tr>
+        <td>Management Subscription</td>
+        <td>Central monitoring, logging, and operations.</td>
+        <td>Azure Monitor, Log Analytics, Sentinel, Automation Account</td>
+      </tr>
+      <tr>
+        <td>Identity Subscription</td>
+        <td>Identity-related shared services if required.</td>
+        <td>Domain services, identity connectors, privileged access components</td>
+      </tr>
+      <tr>
+        <td>Dev / UAT / Prod Subscriptions</td>
+        <td>Environment-wise workload separation.</td>
+        <td>AKS, App Service, VM, Database, Storage</td>
+      </tr>
+      <tr>
+        <td>Sandbox Subscription</td>
+        <td>Controlled testing and learning area.</td>
+        <td>Temporary labs with strict budget and policy controls</td>
+      </tr>
+    </table>
+
+    <h2 class="section-title">6. Security Guardrails</h2>
+    <div class="flow">
+      <div class="card"><h3>Policy Guardrails</h3><ul><li>Allowed regions only</li><li>Mandatory tags</li><li>Allowed SKUs</li><li>Deny public IP where not required</li></ul></div>
+      <div class="card"><h3>Identity Guardrails</h3><ul><li>RBAC via groups</li><li>Least privilege</li><li>PIM for admin roles</li><li>MFA enforcement</li></ul></div>
+      <div class="card"><h3>Network Guardrails</h3><ul><li>Hub-spoke design</li><li>Private endpoint preferred</li><li>NSG and route control</li><li>Firewall inspection</li></ul></div>
+      <div class="card"><h3>Data Guardrails</h3><ul><li>Key Vault for secrets</li><li>Encryption enabled</li><li>Backup policy</li><li>Soft delete and purge protection</li></ul></div>
+    </div>
+
+    <h2 class="section-title">7. Terraform Automation View</h2>
+    <div class="architecture">
+      <div class="diagram">
+        <div class="level mg">Git Repository</div>
+        <div>↓</div>
+        <div class="level sub">Root Module: main.tf, providers.tf, variables.tf, outputs.tf</div>
+        <div>↓</div>
+        <div class="level rg">Child Modules: resource_group, network, security, aks, storage, monitoring</div>
+        <div>↓</div>
+        <div class="level vnet">Environment tfvars: dev.tfvars, uat.tfvars, prod.tfvars</div>
+        <div>↓</div>
+        <div class="level workload">Remote State: Azure Storage Account + Blob Container</div>
+        <div>↓</div>
+        <div class="level ops">CI/CD Pipeline: validate → fmt → plan → security scan → approval → apply</div>
+      </div>
+    </div>
+
+    <h2 class="section-title">8. Operational Readiness Checklist</h2>
+    <table>
+      <tr><th>Area</th><th>Checklist</th></tr>
+      <tr><td>Monitoring</td><td>Azure Monitor, Log Analytics, Application Insights, alerts, dashboards configured.</td></tr>
+      <tr><td>Backup</td><td>Backup policy enabled and restore test completed.</td></tr>
+      <tr><td>DR</td><td>RTO/RPO defined, replication enabled where required, DR drill planned.</td></tr>
+      <tr><td>Security</td><td>Firewall rules, NSG rules, WAF policy, Key Vault, Defender, Sentinel validated.</td></tr>
+      <tr><td>Cost</td><td>Budget, cost alert, tagging, rightsizing, and reservation review configured.</td></tr>
+      <tr><td>Documentation</td><td>HLD, LLD, network diagram, firewall flow, SOP, and runbook prepared.</td></tr>
+    </table>
+
+    <h2 class="section-title">9. Hub and Spoke Landing Zone Design</h2>
+    <div class="two-column">
+      <table>
+        <tr>
+          <th>Hub Network</th>
+          <th>Purpose</th>
+        </tr>
+        <tr>
+          <td>Azure Firewall</td>
+          <td>Central traffic inspection and security control</td>
+        </tr>
+        <tr>
+          <td>VPN / ExpressRoute</td>
+          <td>Connectivity between on-prem and Azure</td>
+        </tr>
+        <tr>
+          <td>Bastion</td>
+          <td>Secure VM access without public IP</td>
+        </tr>
+        <tr>
+          <td>Private DNS</td>
+          <td>Name resolution for private endpoints</td>
+        </tr>
+      </table>
+
+      <table>
+        <tr>
+          <th>Spoke Network</th>
+          <th>Purpose</th>
+        </tr>
+        <tr>
+          <td>Dev Spoke</td>
+          <td>Development workloads</td>
+        </tr>
+        <tr>
+          <td>UAT Spoke</td>
+          <td>Testing and staging workloads</td>
+        </tr>
+        <tr>
+          <td>Prod Spoke</td>
+          <td>Production workloads</td>
+        </tr>
+        <tr>
+          <td>Shared Services Spoke</td>
+          <td>Common tools like monitoring, CI/CD, jump services</td>
+        </tr>
+      </table>
+    </div>
+
+    <h2 class="section-title">10. Landing Zone Implementation Roadmap</h2>
+    <div class="roadmap">
+      <div class="roadmap-item"><strong>Requirement Gathering:</strong> Understand business apps, compliance, users, regions, budget, and availability needs.</div>
+      <div class="roadmap-item"><strong>Design Hierarchy:</strong> Create management groups, subscriptions, and resource group structure.</div>
+      <div class="roadmap-item"><strong>Configure Governance:</strong> Apply Azure Policy, tagging, naming, and region restrictions.</div>
+      <div class="roadmap-item"><strong>Configure IAM:</strong> Create groups, assign RBAC, enforce least privilege and MFA.</div>
+      <div class="roadmap-item"><strong>Build Network:</strong> Create hub-spoke VNet, subnets, peering, route tables, DNS, firewall.</div>
+      <div class="roadmap-item"><strong>Deploy Security:</strong> Enable NSG, ASG, Firewall, WAF, Key Vault, Defender, Sentinel, DDoS as needed.</div>
+      <div class="roadmap-item"><strong>Deploy Workloads:</strong> Provision VM, AKS, App Services, databases, and storage.</div>
+      <div class="roadmap-item"><strong>Enable Monitoring:</strong> Configure Azure Monitor, Log Analytics, Application Insights, alerts, dashboards.</div>
+      <div class="roadmap-item"><strong>Configure Backup and DR:</strong> Define RTO/RPO, backups, replication, and recovery plans.</div>
+      <div class="roadmap-item"><strong>Cost Control:</strong> Configure budget, alerts, tagging, rightsizing, and reserved capacity.</div>
+      <div class="roadmap-item"><strong>Documentation:</strong> Prepare HLD, LLD, network diagram, SOP, runbook, and handover document.</div>
+      <div class="roadmap-item"><strong>Automation:</strong> Convert setup into Terraform/Bicep modules and deploy through CI/CD pipeline.</div>
+    </div>
+
+    <h2 class="section-title">11. Interview-Ready Table</h2>
+    <table>
+      <tr>
+        <th>Area</th>
+        <th>What We Configure</th>
+        <th>Interview Line</th>
+      </tr>
+      <tr>
+        <td>Hierarchy</td>
+        <td>Management Groups, Subscriptions, Resource Groups</td>
+        <td>We organize cloud resources for governance, billing, and access control.</td>
+      </tr>
+      <tr>
+        <td>Governance</td>
+        <td>Policy, Initiatives, Tags, Naming</td>
+        <td>We enforce standards and compliance automatically.</td>
+      </tr>
+      <tr>
+        <td>IAM</td>
+        <td>Entra ID, Groups, RBAC, Managed Identity</td>
+        <td>We follow least privilege access using role-based access control.</td>
+      </tr>
+      <tr>
+        <td>Networking</td>
+        <td>Hub-Spoke, VNet, Subnet, Peering, DNS</td>
+        <td>We create secure and scalable network connectivity.</td>
+      </tr>
+      <tr>
+        <td>Security</td>
+        <td>Firewall, WAF, NSG, Key Vault, Defender, Sentinel</td>
+        <td>We implement defense-in-depth security across layers.</td>
+      </tr>
+      <tr>
+        <td>Compute</td>
+        <td>VM, VMSS, AKS, App Service</td>
+        <td>We select compute based on workload type and scalability requirement.</td>
+      </tr>
+      <tr>
+        <td>Database</td>
+        <td>SQL, PostgreSQL, Cosmos DB</td>
+        <td>We use managed database services for reliability and scalability.</td>
+      </tr>
+      <tr>
+        <td>Monitoring</td>
+        <td>Azure Monitor, Log Analytics, Alerts</td>
+        <td>We centralize logs, metrics, alerts, and dashboards.</td>
+      </tr>
+      <tr>
+        <td>Backup and DR</td>
+        <td>Backup Vault, ASR, RTO, RPO</td>
+        <td>We prepare recovery strategy for data loss and regional failure.</td>
+      </tr>
+      <tr>
+        <td>Cost</td>
+        <td>Budgets, Alerts, Rightsizing, Reservations</td>
+        <td>We optimize spend using FinOps practices.</td>
+      </tr>
+    </table>
+
+    <h2 class="section-title">12. Final Interview Answer</h2>
+    <div class="interview-box">
+      “In my current cloud architecture approach, I design Azure Landing Zones as a secure and scalable enterprise foundation. I start with current-state assessment, then define management group and subscription hierarchy for dev, UAT, prod, connectivity, management, and sandbox. After that I implement governance using Azure Policy, initiatives, naming standards, tagging, and security guardrails. IAM is designed through Entra ID groups, RBAC, least privilege, PIM, managed identities, and app registrations. For networking, I use hub-and-spoke architecture with firewall, bastion, private DNS, route tables, VNet peering, private endpoints, and controlled ingress through WAF or Application Gateway. Once the foundation is ready, workloads like VM, AKS, App Service, databases, and storage are onboarded. Finally, I enable monitoring, backup, disaster recovery, high availability, FinOps, documentation, and Terraform-based automation through CI/CD pipelines with approval and security scanning.”
+    </div>
+
+    <h2 class="section-title">13. Personal Introduction for Interview</h2>
+    <div class="interview-box">
+      “My name is Satish Mali. I have 15+ years of experience in IT infrastructure, cloud architecture, DevOps, and security governance, including 8+ years focused on cloud architecture. I have worked on Azure, AWS, Kubernetes, Terraform, CI/CD, GitOps, observability, Zero Trust, IAM/RBAC, and cloud governance. In Landing Zone projects, my role is to design the secure cloud foundation including hierarchy, networking, identity, policy guardrails, security controls, monitoring, backup, disaster recovery, cost optimization, and automation. My focus is to build cloud platforms that are secure, scalable, cost-optimized, and production-ready.”
+    </div>
+
+    <h2 class="section-title">14. Common Mistakes to Avoid</h2>
+    <div class="warning-box">
+      <ul>
+        <li>Do not directly create production workloads without governance.</li>
+        <li>Do not give Owner access to everyone.</li>
+        <li>Do not expose VMs with public IP unnecessarily.</li>
+        <li>Do not skip tagging and cost controls.</li>
+        <li>Do not keep firewall, monitoring, backup, and DR as afterthoughts.</li>
+        <li>Do not use manual ClickOps only; automate using Terraform/Bicep.</li>
+      </ul>
+    </div>
+
+    <div class="footer">
+      <h3>Landing Zone = Secure Cloud Foundation + Governance + Automation + Operations</h3>
+      <p>Prepared for interview, architecture discussion, and real enterprise implementation.</p>
+    </div>
+
+  </div>
+</body>
+</html>
